@@ -80,3 +80,27 @@
 
 // ITCM is in short supply so excluding fast code where preferred, not required.
 #define FAST_CODE_PREF
+
+#define USE_RACE_PRO
+// USE_RACE_PRO feature pack
+#ifdef USE_RACE_PRO
+
+#ifdef USE_DSHOT_TELEMETRY
+#ifndef USE_RPM_LIMIT
+#define USE_RPM_LIMIT
+#endif
+#endif
+
+#ifdef USE_OSD
+#ifndef USE_OSD_QUICK_MENU
+#define USE_OSD_QUICK_MENU
+#endif
+#ifndef USE_RC_STATS
+#define USE_RC_STATS
+#endif
+#ifndef USE_SPEC_PREARM_SCREEN
+#define USE_SPEC_PREARM_SCREEN
+#endif
+#endif
+
+#endif // USE_RACE_PRO
