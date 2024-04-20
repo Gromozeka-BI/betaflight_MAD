@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#define DEBUG16_VALUE_COUNT 20
+#define DEBUG16_VALUE_COUNT 21
 extern int16_t debug[DEBUG16_VALUE_COUNT];
 extern uint8_t debugMode;
 
