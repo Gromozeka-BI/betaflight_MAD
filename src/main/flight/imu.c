@@ -746,6 +746,10 @@ void imuUpdateAttitude(timeUs_t currentTimeUs)
 
     DEBUG_SET(DEBUG_ATTITUDE, 0, attitude.values.yaw); // roll
     DEBUG_SET(DEBUG_ATTITUDE, 1, attitude.values.pitch); // pitch
+
+    DEBUG_SET(DEBUG_BIG_BLACK, 4, lrintf(attitude.raw[FD_PITCH])); // Угловое положение дрона РАБОТАЕТ!
+    DEBUG_SET(DEBUG_BIG_BLACK, 5, lrintf(attitude.raw[FD_ROLL])); // Угловое положение дрона  РАБОТАЕТ!
+    DEBUG_SET(DEBUG_BIG_BLACK, 6, lrintf(attitude.raw[FD_YAW])); // Угловое положение дрона РАБОТАЕТ!
 }
 #endif // USE_ACC
 

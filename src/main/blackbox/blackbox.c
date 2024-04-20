@@ -22,6 +22,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 #include "platform.h"
 
@@ -667,6 +668,7 @@ static void writeIntraframe(void)
     if (testBlackboxCondition(CONDITION(BARO))) {
         blackboxWriteSignedVB(blackboxCurrent->baroAlt);
     }
+    //DEBUG_SET(DEBUG_BIG_BLACK, 15, lrintf(blackboxCurrent->baroAlt)); // На этапе проверки данных
 #endif
 
 #ifdef USE_RANGEFINDER
@@ -799,6 +801,28 @@ static void writeInterframe(void)
         deltas[x] = blackboxCurrent->rcCommand[x] - blackboxLast->rcCommand[x];
         setpointDeltas[x] = blackboxCurrent->setpoint[x] - blackboxLast->setpoint[x];
     }
+
+    DEBUG_SET(DEBUG_BIG_BLACK, 0, lrintf(blackboxCurrent->setpoint[0])); // угловая скорость (ROLL) работает
+    DEBUG_SET(DEBUG_BIG_BLACK, 1, lrintf(blackboxCurrent->setpoint[1])); // угловая скорость (PITCH) работает
+    DEBUG_SET(DEBUG_BIG_BLACK, 2, lrintf(blackboxCurrent->setpoint[2])); // угловая скорость (YAW) работает
+    //DEBUG_SET(DEBUG_BIG_BLACK, 3, lrintf(blackboxCurrent->setpoint[3])); // тут надо поправить данные работает
+    //DEBUG_SET(DEBUG_BIG_BLACK, 3, lrintf(mixerGetThrottle() * 1000)); // попробовать так писать газ
+    DEBUG_SET(DEBUG_BIG_BLACK, 7, lrintf(gpsSol.numSat));
+    DEBUG_SET(DEBUG_BIG_BLACK, 8, lrintf(gpsSol.llh.altCm / 10));
+    DEBUG_SET(DEBUG_BIG_BLACK, 9, lrintf(gpsSol.groundSpeed));
+    DEBUG_SET(DEBUG_BIG_BLACK, 10, lrintf(gpsSol.groundCourse));
+    DEBUG_SET(DEBUG_BIG_BLACK, 11, gpsSol.llh.lon);
+    DEBUG_SET(DEBUG_BIG_BLACK, 12, gpsSol.llh.lat);
+
+    const int degreesPartLon = labs(gpsSol.llh.lon) / GPS_DEGREES_DIVIDER;
+    int fractionalPartLon = labs(gpsSol.llh.lon) % GPS_DEGREES_DIVIDER;
+    const int degreesPartLat = labs(gpsSol.llh.lat) / GPS_DEGREES_DIVIDER;
+    int fractionalPartLat = labs(gpsSol.llh.lat) % GPS_DEGREES_DIVIDER;
+    DEBUG_SET(DEBUG_BIG_BLACK, 13, lrintf(degreesPartLon));
+    DEBUG_SET(DEBUG_BIG_BLACK, 14, lrintf(fractionalPartLon));
+    DEBUG_SET(DEBUG_BIG_BLACK, 15, lrintf(degreesPartLat));
+    DEBUG_SET(DEBUG_BIG_BLACK, 16, lrintf(fractionalPartLat));
+//BIG_BLACK    
 
     if (testBlackboxCondition(CONDITION(RC_COMMANDS))) {
         blackboxWriteTag8_4S16(deltas);
@@ -1129,6 +1153,9 @@ static void writeGPSFrame(timeUs_t currentTimeUs)
     gpsHistory.GPS_numSat = gpsSol.numSat;
     gpsHistory.GPS_coord[GPS_LATITUDE] = gpsSol.llh.lat;
     gpsHistory.GPS_coord[GPS_LONGITUDE] = gpsSol.llh.lon;
+
+    DEBUG_SET(DEBUG_BIG_BLACK, 17, gpsHistory.GPS_coord[GPS_LATITUDE]);
+    DEBUG_SET(DEBUG_BIG_BLACK, 18, gpsHistory.GPS_coord[GPS_LONGITUDE]);
 }
 #endif
 

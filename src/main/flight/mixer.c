@@ -385,6 +385,8 @@ static void applyRpmLimiter(mixerRuntime_t *mixer)
     DEBUG_SET(DEBUG_RPM_LIMIT, 5, lrintf(p * 100.0f));
     DEBUG_SET(DEBUG_RPM_LIMIT, 6, lrintf(mixer->rpmLimiterI * 100.0f));
     DEBUG_SET(DEBUG_RPM_LIMIT, 7, lrintf(d * 100.0f));
+
+    DEBUG_SET(DEBUG_BIG_BLACK, 3, lrintf(throttle * 1000.0f)); //Значение газа, которое передается на мотор
 }
 #endif // USE_RPM_LIMIT
 
