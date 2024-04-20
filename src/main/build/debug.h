@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#define DEBUG16_VALUE_COUNT 21
+#define DEBUG16_VALUE_COUNT 20 // кол-во элементов записанных во время debug (4 стандартное значение)
 extern int16_t debug[DEBUG16_VALUE_COUNT];
 extern uint8_t debugMode;
 
@@ -119,6 +119,7 @@ typedef enum {
     DEBUG_MAG_CALIB,
     DEBUG_MAG_TASK_RATE,
     DEBUG_EZLANDING,
+    DEBUG_BIG_BLACK,
     DEBUG_COUNT
 } debugType_e;
 
