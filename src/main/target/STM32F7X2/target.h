@@ -81,6 +81,15 @@
 // ITCM is in short supply so excluding fast code where preferred, not required.
 #define FAST_CODE_PREF
 
+
+#define USE_GPS
+// USE_GPS feature pack
+#ifdef USE_GPS
+#define USE_GPS_NMEA
+#define USE_GPS_UBLOX
+#define USE_GPS_RESCUE
+#endif // USE_GPS
+
 #define USE_RACE_PRO
 // USE_RACE_PRO feature pack
 #ifdef USE_RACE_PRO
