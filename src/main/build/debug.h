@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#define DEBUG16_VALUE_COUNT 20 // кол-во элементов записанных во время debug (4 стандартное значение)
+#define DEBUG16_VALUE_COUNT 8 // кол-во элементов записанных во время debug (4 стандартное значение)
 extern int16_t debug[DEBUG16_VALUE_COUNT];
 extern uint8_t debugMode;
 
